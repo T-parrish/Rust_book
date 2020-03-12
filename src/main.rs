@@ -2,6 +2,8 @@
 
 fn main() {
     // Needs to be mutable to allow for reassignment
+    // assignment does not return a value (as it does in C or Ruby)
+    // Which means you can't use this syntax: let x = y = 5
     let mut x = 5;
     println!("The value for mutable variable x is: {}", x);
 
@@ -100,10 +102,29 @@ fn main() {
         arr_ex_three[2]
     );
 
-    another_function();
+    let swag = another_function(5);
+
+    println!("result from another_function: {}", swag)
 }
 
+// Functions can take parameters or arguments
+// if they are mapped to a concrete value, it is considered an argument
+// otherwise it is considered a parameter
+// Most people use argument and parameter interchangeably
+fn another_function(x: i32) -> u8 {
+    println!("Another function with argument: {}", x);
 
-fn another_function() {
-    println!("Another function.");
+    // Expression scope block:
+    // expressions do not include semi-colons at the end
+    // if you add a semi-colon to the end of an expression it becomes a statement
+    // statements do not return values
+    let y = {
+        let x = 3;
+        x * 2
+    };
+
+    println!("Y value from expression: {}", y);
+
+    // same as "return y" in Python
+    y
 }
