@@ -1,6 +1,16 @@
-// Notes on variables and Rust Types
+// Dem Notes
 
 fn main() {
+    variable();
+    compound_types();
+
+    let swag = another_function(5);
+    println!("result from another_function: {}", swag);
+
+    iterators();
+}
+
+fn variable() {
     // Needs to be mutable to allow for reassignment
     // assignment does not return a value (as it does in C or Ruby)
     // Which means you can't use this syntax: let x = y = 5
@@ -54,7 +64,9 @@ fn main() {
         "Example of Rust Char: {} \nExample of Rust String: {}",
         char_example, string_example
     );
+}
 
+fn compound_types() {
     // Tuples are compound Types with a fixed length,
     // they provide a way to group a number of items, maybe with different Types
     // tup = signed 32-bit int, 64-bit float, unsigned 8-bit int
@@ -101,11 +113,45 @@ fn main() {
         arr_ex_three[1],
         arr_ex_three[2]
     );
+}
 
-    let swag = another_function(5);
+// Functions can take parameters or arguments
+// if they are mapped to a concrete value, it is considered an argument
+// otherwise it is considered a parameter
+// Most people use argument and parameter interchangeably
+fn another_function(x: i32) -> u8 {
+    println!("Another function with argument: {}", x);
 
-    println!("result from another_function: {}", swag);
+    // Expression scope block:
+    // expressions do not include semi-colons at the end
+    // if you add a semi-colon to the end of an expression it becomes a statement
+    // statements do not return values
+    let y = {
+        let x = 3;
+        x * 2
+    };
 
+    println!("Y value from expression: {}", y);
+
+    // If expressions expect a boolean Type
+    // Rust does not convert non-boolean types to boolean types like Javascript
+    // eg: if y { println!("{}", y) } doesn't work, since Rust expects a boolean
+    if y < 7 {
+        println!("{} is less than 7", y)
+    } else {
+        println!("{} is greater than 7", y)
+    }
+
+    // Can use if expressions in let statements
+    let x = if y < 7 { y } else { 0 };
+
+    println!("value of conditional x is: {}", x);
+
+    // same as "return y" in Python
+    y
+}
+
+fn iterators() {
     let mut counter = 0;
 
     // Loop syntax that increments the above counter on every iteration
@@ -145,42 +191,4 @@ fn main() {
         println!("{}!", number);
     }
     println!("LIFTOFF!!!");
-
-
-}
-
-// Functions can take parameters or arguments
-// if they are mapped to a concrete value, it is considered an argument
-// otherwise it is considered a parameter
-// Most people use argument and parameter interchangeably
-fn another_function(x: i32) -> u8 {
-    println!("Another function with argument: {}", x);
-
-    // Expression scope block:
-    // expressions do not include semi-colons at the end
-    // if you add a semi-colon to the end of an expression it becomes a statement
-    // statements do not return values
-    let y = {
-        let x = 3;
-        x * 2
-    };
-
-    println!("Y value from expression: {}", y);
-
-    // If expressions expect a boolean Type
-    // Rust does not convert non-boolean types to boolean types like Javascript
-    // eg: if y { println!("{}", y) } doesn't work, since Rust expects a boolean
-    if y < 7 {
-        println!("{} is less than 7", y)
-    } else {
-        println!("{} is greater than 7", y)
-    }
-
-    // Can use if expressions in let statements
-    let x = if y < 7 { y } else { 0 };
-
-    println!("value of conditional x is: {}", x);
-
-    // same as "return y" in Python
-    y
 }
