@@ -11,9 +11,57 @@ fn main() {
     ownership();
 
     let test_string = String::from("Booyakasha, fire pon the selectah");
-    let first_word = slices(&test_string);
 
-    println!("Original sentence: {} \nLength of 1st word: {}", test_string, first_word)
+    // Since slices takes a string slice, pass a slice
+    let mut first_word = slices(&test_string[..]);
+    println!(
+        "Original sentence: {} \n1st word: {}",
+        test_string, first_word
+    );
+
+    // String literals are &str type, so you can pass these by themselves
+    let string_two = "Dis is de General";
+    first_word = slices(string_two);
+    println!(
+        "Original sentence: {} \n1st word: {}",
+        string_two, first_word
+    );
+
+    let user1 = build_user(
+        String::from("twpearish@gmail.com"),
+        String::from("JimmyJammy"),
+    );
+
+    println!(
+        "{} with email address {} has logged in {} times. \nIs he currently logged in? {}",
+        user1.username, user1.email, user1.sign_in_count, user1.active
+    );
+
+    // In order to mutate the values on a struct, the entire instance must be mutable
+    let mut user2 = User {
+        email: String::from("sp4zium@gmail.com"),
+        username: String::from("marklar"),
+        active: true,
+        sign_in_count: 1,
+    };
+    println!("User2 email before mutating: {}", user2.email);
+
+    user2.email = String::from("wakawaka@gmail.com");
+    println!("User2 email after mutating: {}", user2.email);
+
+    // you can spread another struct's values into a struct
+    // this example fills the active and sign_in_count values with
+    // the values from user1
+    let user3 = User {
+        email: String::from("blerch@gmail.com"),
+        username: String::from("wakawaka"),
+        ..user1
+    };
+
+    println!(
+        "email: {} username: {} sign in count: {} active: {} ",
+        user3.email, user3.username, user3.sign_in_count, user3.active
+    );
 }
 
 fn variable() {
@@ -259,7 +307,8 @@ fn add_to_string(input_string: &mut String) -> (usize, usize, String) {
     (input_string.len(), orig.len(), orig)
 }
 
-fn slices(s: &String) -> usize {
+// &str signifies a string slice type
+fn slices(s: &str) -> &str {
     // Since you can't iterate over a String directly,
     // create a bytes array
     let bytes = s.as_bytes();
@@ -269,10 +318,30 @@ fn slices(s: &String) -> usize {
     for (i, &item) in bytes.iter().enumerate() {
         // find the first empty space and return the index
         if item == b' ' {
-            return i;
+            // Returns a slice from 0 -> index of space
+            return &s[0..i];
         }
     }
 
     // base case: return length of string if there are no spaces
-    s.len()
+    &s[..]
+}
+
+struct User {
+    // Use String type so the instance has ownership over the value
+    // If you wanted to use a &str, you would need to specify a lifetime
+    username: String,
+    email: String,
+    sign_in_count: u64,
+    active: bool,
+}
+
+fn build_user(email: String, username: String) -> User {
+    // Constructs a user given an email and username parameter
+    User {
+        email,
+        username,
+        active: true,
+        sign_in_count: 1,
+    }
 }
