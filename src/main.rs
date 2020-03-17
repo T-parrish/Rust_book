@@ -22,10 +22,12 @@ fn main() {
     structs::struct_exploration();
     enums::enum_stuff();
     col_notes::vectors();
+    col_notes::strings();
+    col_notes::hash_map();
 
     // demonstrates return syntax for rust
-    let check = funcs::another_function(5);
-    println!("result from another_function: {}", check);
+    // let check = funcs::another_function(5);
+    // println!("result from another_function: {}", check);
 }
 
 
