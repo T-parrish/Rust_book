@@ -7,9 +7,11 @@ mod slicing;
 mod structs;
 mod enums;
 mod funcs;
+mod collections;
 
 use crate::ownership::owner_notes;
 use crate::slicing::slice_notes;
+use crate::collections::col_notes;
 
 fn main() {
     variables::variable();
@@ -19,6 +21,7 @@ fn main() {
     slice_notes::example();
     structs::struct_exploration();
     enums::enum_stuff();
+    col_notes::vectors();
 
     // demonstrates return syntax for rust
     let check = funcs::another_function(5);
