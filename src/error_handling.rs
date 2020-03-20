@@ -51,6 +51,7 @@ pub fn read_username_from_file() -> Result<String, io::Error> {
     };
     println!("String from match statement with Error Types: {:?}", f5);
 
+    // Verbose way to match every step of the process when reading file data
     let f6 = File::open("hello.txt");
     let mut f6 = match f6 {
         Ok(file) => file,
@@ -80,16 +81,21 @@ pub fn struct_handling() {
     }
 
     impl Guess {
+        // Associated (read: static in Python) function that validates the input
+        // to be between 1 and 100, then returns an instance of Guess
+        // if the value falls outside that range, panic
         pub fn new(value: u16) -> Guess {
             if value < 1 || value > 100 {
                 panic!("Guess value must be between 1 and 100, got {}.", value);
             }
 
+            // new() evaluates to an instance of guess with the validated value
             Guess {
                 value
             }
         }
 
+        // Instance method that returns its value
         pub fn value(&self) -> u16 {
             self.value
         }
