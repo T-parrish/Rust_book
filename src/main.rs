@@ -8,6 +8,7 @@ mod structs;
 mod enums;
 mod funcs;
 mod collections;
+mod error_handling;
 
 use crate::ownership::owner_notes;
 use crate::slicing::slice_notes;
@@ -24,6 +25,13 @@ fn main() {
     col_notes::vectors();
     col_notes::strings();
     col_notes::hash_map();
+    match error_handling::read_username_from_file() {
+        Ok(_) => println!("everything is ok"),
+        Err(e) => panic!("unable to read from file: {}", e)
+    };
+
+    error_handling::parsing_notes();
+    error_handling::struct_handling();
 
     // demonstrates return syntax for rust
     // let check = funcs::another_function(5);
