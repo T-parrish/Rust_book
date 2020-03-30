@@ -11,6 +11,7 @@ mod slicing;
 mod structs;
 mod traits;
 mod variables;
+mod box_notes;
 
 use crate::collections::col_notes;
 use crate::ownership::owner_notes;
