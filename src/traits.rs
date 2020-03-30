@@ -64,6 +64,7 @@ pub fn trait_notes() {
     }
 
     // Same as above, but using a Generic with a Trait Bound
+    #[allow(dead_code)]
     fn trait_bound<T: Summary>(item: T) {
         println!(
             "Breaking news, but using a Trait Bound! {}",

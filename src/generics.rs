@@ -43,6 +43,7 @@ pub fn get_t<T: PartialOrd>(list: &[T]) -> &T {
     &list[target]
 }
 
+#[allow(dead_code)]
 pub fn generic_notes() {
     // Point is initialized with x and y both of type T
     // if they are not the same type, the compiler will throw an error
